@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Version>1.0.0</Version>
+		<TargetFrameworks>net472;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<RootNamespace>SelectedItemsSynchronizer.CiTests</RootNamespace>
+		<AssemblyName>SelectedItemsSynchronizer.SH.CiTests</AssemblyName>
+		<AssemblyTitle>SelectedItemsSynchronizer.SH.CiTests</AssemblyTitle>
+		<Product>SelectedItemsSynchronizer.SH.CiTests</Product>
+		<Copyright>Copyright ©  2024</Copyright>
+		<IsPackable>false</IsPackable>
+		<UseWPF>true</UseWPF>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="6.12.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.2.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.2.2" />
+
+		<ProjectReference Include="..\SelectedItemsSynchronizer\SelectedItemsSynchronizer.csproj" />
+	</ItemGroup>
+</Project>

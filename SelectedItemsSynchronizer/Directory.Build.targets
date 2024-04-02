@@ -1,0 +1,9 @@
+﻿<Project>
+	<!-- Appends the GIT commit to the FileVersion. -->
+	<Target Name="BeforeBuild" DependsOnTargets="GitVersion">
+		<WriteLinesToFile File="Properties/GitVersionInfo_$(TargetFramework).cs" Overwrite="True" Lines=
+		"
+		[assembly: System.Reflection.AssemblyInformationalVersion(&quot;$(Version)-$(GitCommit)&quot;)]
+		" />
+	</Target>
+</Project>

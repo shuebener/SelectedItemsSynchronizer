@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Version>1.0.0</Version>
+		<LangVersion>Latest</LangVersion>
+		<TargetFrameworks>net45;net472;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<OutputType>Library</OutputType>
+		<RootNamespace>SelectedItemsSynchronizer</RootNamespace>
+		<AssemblyName>SelectedItemsSynchronizer.SH</AssemblyName>
+		<UseWPF>true</UseWPF>
+		<NeutralLanguage>en</NeutralLanguage>
+		<DocumentationFile>$(TargetDir)SelectedItemsSynchronizer.SH.xml</DocumentationFile>
+		<Configurations>Debug;Release</Configurations>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>nullable</WarningsAsErrors>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove=".git" />
+		<None Remove=".gitattributes" />
+		<None Remove=".gitignore" />
+		<None Remove="SelectedItemsSynchronizer.SH.xml" />		
+		
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\Psync128.png" Pack="true" PackagePath="\" />
+
+		<Compile Remove="Properties\GitVersionInfo*.cs" />
+		<Compile Include="Properties\GitVersionInfo_$(TargetFramework).cs" Visible="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="GitInfo" Version="3.3.4" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+	</ItemGroup>
+</Project>

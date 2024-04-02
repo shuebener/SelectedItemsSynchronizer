@@ -1,0 +1,28 @@
+<Project>
+	<PropertyGroup>		
+		<Authors>SelectedItemsSynchronizer contributors</Authors>
+		<Company></Company>
+		<Title>SelectedItemsSynchronizer.SH</Title>
+		<Product>SelectedItemsSynchronizer.SH</Product>
+		<Description>Facilitates two-way binding of the readonly MultiSelector.SelectedItems property in ListBox/ListView on WPF. There's also a working prototype/example for binding Calendar.SelectedDates using a similar mechanism.</Description>
+		<Copyright>Copyright © 2024 Sebastian Huebener</Copyright>
+		<GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+		<GitVersion>false</GitVersion>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://github.com/shuebener/SelectedItemsSynchronizer</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/shuebener/SelectedItemsSynchronizer.git</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedAllSources>true</EmbedAllSources>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>Psync128.png</PackageIcon>
+		<PackageTags>SelectedItems WPF binding ViewModel MVVM multiselector selector ListView ListBox</PackageTags>
+	</PropertyGroup>
+</Project>

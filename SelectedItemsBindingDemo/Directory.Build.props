@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>		
+		<Authors>SelectedItemsSynchronizer contributors</Authors>
+		<Company></Company>
+		<Title>SelectedItemsBindingDemo</Title>
+		<Product>SelectedItemsBindingDemo</Product>
+		<Description></Description>
+		<Copyright>Copyright © 2024, SelectedItemSynchronizer contributors</Copyright>				
+	</PropertyGroup>
+</Project>

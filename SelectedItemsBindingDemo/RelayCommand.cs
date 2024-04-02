@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace SelectedItemsBindingDemo
 {
@@ -18,7 +15,7 @@ namespace SelectedItemsBindingDemo
         #region Fields
 
         readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
+        readonly Predicate<object>? _canExecute = null;
 
         #endregion // Fields
 
@@ -29,7 +26,7 @@ namespace SelectedItemsBindingDemo
         {
         }
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<object>? execute, Predicate<object>? canExecute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
@@ -44,7 +41,7 @@ namespace SelectedItemsBindingDemo
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         public event EventHandler CanExecuteChanged

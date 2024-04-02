@@ -1,4 +1,4 @@
-namespace PrimS.SelectedItemsSynchronizer.CiTests
+namespace SelectedItemsSynchronizer.CiTests
 {
   using System.Collections.ObjectModel;
   using FluentAssertions;
@@ -31,7 +31,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
     public void ShouldBeSynchronised()
     {
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList);
+      this.targetList.Should().BeEquivalentTo(this.masterList);
     }
 
     [TestMethod]
@@ -54,7 +54,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.masterList[0] = "Replaced";
 
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
+      this.targetList.Should().BeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
     }
 
     [TestMethod]
@@ -64,7 +64,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.targetList[0] = "Replaced";
 
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
+      this.targetList.Should().BeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
     }
   }
 }

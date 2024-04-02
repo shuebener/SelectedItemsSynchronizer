@@ -1,4 +1,4 @@
-﻿namespace PrimS.SelectedItemsSynchronizer.CiTests
+﻿namespace SelectedItemsSynchronizer.CiTests
 {
   using System;
   using System.Collections.ObjectModel;

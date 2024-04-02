@@ -1,136 +1,143 @@
-﻿namespace PrimS.SelectedItemsSynchronizer.CiTests
+﻿namespace SelectedItemsSynchronizer.CiTests
 {
-  using FluentAssertions;
-  using Microsoft.VisualStudio.TestTools.UnitTesting;
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Collections.ObjectModel;
-  using System.Linq;
-  using System.Windows.Controls;
+	using FluentAssertions;
+	
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-  [TestClass]
-  public class MultiSelectorBehavioursListViewTests
-  {
-    List<string> names;
-    ObservableCollection<string> selectedNames;
-    ListView listView;
+	using SelectedItemsSynchronizer.CiTests.STAExtensions;
 
-    [TestInitialize]
-    public void TestInitialize()
-    {
-      names = new List<string>() { "Abraham", "Lincoln", "James", "Buchanan" };
-      selectedNames = new ObservableCollection<string>();
-      listView = new ListView();
-      listView.ItemsSource = names;
-      listView.SelectionMode = SelectionMode.Extended;
-      MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)selectedNames);
-    }
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Collections.ObjectModel;
+	using System.Linq;
+	using System.Windows.Controls;
 
-    [TestMethod]
-    public void InitialiseToNoSelection()
-    {
-      this.selectedNames.Count().Should().Be(0);
-    }
+	[STATestClass]
+	public class MultiSelectorBehavioursListViewTests
+	{
+		List<string> names;
+		ObservableCollection<string> selectedNames;
+		ListView listView;
 
-    [TestMethod]
-    public void ShouldSynchroniseListViewSelectAll()
-    {
-      // Act
-      this.listView.SelectAll();
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			names = new List<string>() { "Abraham", "Lincoln", "James", "Buchanan" };
+			selectedNames = new ObservableCollection<string>();
+			listView = new ListView();
+			listView.ItemsSource = names;
+			listView.SelectionMode = SelectionMode.Extended;
+			MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)selectedNames);
+		}
 
-      // Assert
-      this.selectedNames.Count().Should().Be(this.names.Count());
-    }
+		[TestMethod]
+		public void InitialiseToNoSelection()
+		{
+			this.selectedNames.Count().Should().Be(0);
+		}
 
-    [TestMethod]
-    public void ShouldSynchroniseListViewSetSelectedIndex()
-    {
-      // Act
-      this.listView.SelectedIndex = 0;
+		[TestMethod]
+		public void ShouldSynchroniseListViewSelectAll()
+		{
+			// Act
+			this.listView.SelectAll();
 
-      // Assert
-      this.selectedNames.Count().Should().Be(1);
-    }
+			// Assert
+			this.selectedNames.Count().Should().Be(this.names.Count());
+		}
 
-    [TestMethod]
-    public void ShouldSynchroniseListViewSetSelectedItem()
-    {
-      //Arrange
-      Random random = new Random(DateTime.Now.Millisecond);
-      object itemToSelect = this.listView.Items.GetItemAt(random.Next(this.names.Count));
+		[TestMethod]
+		public void ShouldSynchroniseListViewSetSelectedIndex()
+		{
+			// Act
+			listView.SelectedIndex = 0;
 
-      // Act
-      this.listView.SelectedItem = itemToSelect;
+			// Assert
+			selectedNames.Count().Should().Be(1);
+		}
 
-      // Assert
-      this.selectedNames.Count().Should().Be(1);
-    }
+		[TestMethod]
+		public void ShouldSynchroniseListViewSetSelectedItem()
+		{
+			//Arrange
+			Random random = new Random(DateTime.Now.Millisecond);
+			object itemToSelect = listView.Items.GetItemAt(random.Next(this.names.Count));
 
-    [TestMethod]
-    public void ShouldSynchroniseListViewAddSingleSelectedItem()
-    {
-      //Arrange
-      Random random = new Random(DateTime.Now.Millisecond);
-      object itemToSelect = this.listView.Items.GetItemAt(random.Next(this.names.Count));
+			// Act
+			listView.SelectedItem = itemToSelect;
 
-      // Act
-      this.listView.SelectedItems.Add(itemToSelect);
+			// Assert
+			selectedNames.Count().Should().Be(1);
+		}
 
-      // Assert
-      this.selectedNames.Count().Should().Be(1);
-    }
+		[TestMethod]
+		public void ShouldSynchroniseListViewAddSingleSelectedItem()
+		{
+			//Arrange
+			Random random = new Random(DateTime.Now.Millisecond);
+			object itemToSelect = this.listView.Items.GetItemAt(random.Next(this.names.Count));
 
-    [TestMethod]
-    public void ShouldSynchroniseListViewAddMultipleSelectedItems()
-    {
-      // Act
-      this.listView.SelectedItems.Add(this.listView.Items.GetItemAt(0));
-      this.listView.SelectedItems.Add(this.listView.Items.GetItemAt(1));
+			// Act
+			listView.SelectedItems.Add(itemToSelect);
 
-      // Assert
-      this.selectedNames.ShouldBeEquivalentTo(this.listView.SelectedItems, opt => opt.WithStrictOrdering());
-    }
+			// Assert
+			selectedNames.Count().Should().Be(1);
+		}
 
-    [TestMethod]
-    public void ShouldSynchroniseListAddMultipleSelectedItems()
-    {
-      // Act
-      this.selectedNames.Add(this.names.First());
-      this.selectedNames.Add(this.names.Last());
+		[TestMethod]
+		public void ShouldSynchroniseListViewAddMultipleSelectedItems()
+		{
+			// Act
+			listView.SelectedItems.Add(listView.Items.GetItemAt(0));
+			listView.SelectedItems.Add(listView.Items.GetItemAt(1));
 
-      // Assert
-      this.listView.SelectedItems.ShouldBeEquivalentTo(this.selectedNames, opt => opt.WithStrictOrdering());
-    }
+			// Assert
 
-    [TestMethod]
-    public void ShouldNotSynchroniseListAddMultipleSelectedItems()
-    {
-      //Arrange
-      ObservableCollection<string> secondSelectedNames = new ObservableCollection<string>();
+			//listView.SelectedItems
+			selectedNames.Should().BeEquivalentTo(listView.SelectedItems.Cast<string>(), opt => opt.WithStrictOrdering());
+			selectedNames.Should().BeEquivalentTo(listView.SelectedItems.Cast<string>(), opt => opt.WithStrictOrdering());
+		}
 
-      // Act
-      MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)secondSelectedNames);
-      this.selectedNames.Add(this.names.First());
-      this.selectedNames.Add(this.names.Last());
+		[TestMethod]
+		public void ShouldSynchroniseListAddMultipleSelectedItems()
+		{
+			// Act
+			selectedNames.Add(names.First());
+			selectedNames.Add(names.Last());
 
-      // Assert
-      this.listView.SelectedItems.Should().NotBeEquivalentTo(this.selectedNames);
-    }
+			// Assert
+			this.listView.SelectedItems.Should().BeEquivalentTo(selectedNames, opt => opt.WithStrictOrdering());
+		}
 
-    [TestMethod]
-    public void ShouldSynchroniseChangedListAddMultipleSelectedItems()
-    {
-      //Arrange
-      ObservableCollection<string> secondSelectedNames = new ObservableCollection<string>();
+		[TestMethod]
+		public void ShouldNotSynchroniseListAddMultipleSelectedItems()
+		{
+			//Arrange
+			ObservableCollection<string> secondSelectedNames = new ObservableCollection<string>();
 
-      // Act
-      MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)secondSelectedNames);
-      secondSelectedNames.Add(this.names.First());
-      secondSelectedNames.Add(this.names.Last());
+			// Act
+			MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)secondSelectedNames);
+			this.selectedNames.Add(this.names.First());
+			this.selectedNames.Add(this.names.Last());
 
-      // Assert
-      this.listView.SelectedItems.ShouldBeEquivalentTo(secondSelectedNames);
-    }
-  }
+			// Assert
+			this.listView.SelectedItems.Should().NotBeEquivalentTo(this.selectedNames);
+		}
+
+		[TestMethod]
+		public void ShouldSynchroniseChangedListAddMultipleSelectedItems()
+		{
+			//Arrange
+			ObservableCollection<string> secondSelectedNames = new ObservableCollection<string>();
+
+			// Act
+			MultiSelectorBehaviours.SetSynchronizedSelectedItems(listView, (IList)secondSelectedNames);
+			secondSelectedNames.Add(this.names.First());
+			secondSelectedNames.Add(this.names.Last());
+
+			// Assert
+			this.listView.SelectedItems.Should().BeEquivalentTo(secondSelectedNames);
+		}
+	}
 }

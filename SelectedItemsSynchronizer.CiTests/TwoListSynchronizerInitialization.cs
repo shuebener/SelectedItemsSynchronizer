@@ -1,4 +1,4 @@
-namespace PrimS.SelectedItemsSynchronizer.CiTests
+namespace SelectedItemsSynchronizer.CiTests
 {
   using System.Collections.ObjectModel;
   using FluentAssertions;
@@ -17,7 +17,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       TwoListSynchronizer sut = new TwoListSynchronizer(masterList, targetList);
       sut.StartSynchronizing();
 
-      targetList.ShouldBeEquivalentTo(masterList, "ctor should initialise targetList.");
+      targetList.Should().BeEquivalentTo(masterList, "ctor should initialise targetList.");
     }
 
     [TestMethod]
@@ -30,7 +30,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       TwoListSynchronizer sut = new TwoListSynchronizer(masterList, targetList);
       sut.StartSynchronizing();
 
-      targetList.ShouldBeEquivalentTo(masterList, "ctor should initialise targetList.");
+      targetList.Should().BeEquivalentTo(masterList, "ctor should initialise targetList.");
       targetList.Should().BeEmpty("ctor should overwrite targetList with masterList content.");
     }
   }

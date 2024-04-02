@@ -1,4 +1,4 @@
-namespace PrimS.SelectedItemsSynchronizer.CiTests
+namespace SelectedItemsSynchronizer.CiTests
 {
   using System.Collections.ObjectModel;
   using System.Linq;
@@ -32,7 +32,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
     public void ShouldBeSynchronised()
     {
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
+      this.targetList.Should().BeEquivalentTo(this.masterList, opt => opt.WithStrictOrdering());
     }
 
     [TestMethod]
@@ -68,7 +68,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.masterList.Remove("InitialisedFirst");
 
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList);
+      this.targetList.Should().BeEquivalentTo(this.masterList);
     }
 
     [TestMethod]
@@ -78,7 +78,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.masterList.RemoveAt(0);
 
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList);
+      this.targetList.Should().BeEquivalentTo(this.masterList);
     }
 
     [TestMethod]
@@ -102,7 +102,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.masterList.Clear();
 
       // Assert
-      this.targetList.ShouldBeEquivalentTo(this.masterList);
+      this.targetList.Should().BeEquivalentTo(this.masterList);
     }
 
     [TestMethod]
@@ -112,7 +112,7 @@ namespace PrimS.SelectedItemsSynchronizer.CiTests
       this.targetList.Clear();
 
       // Assert
-      this.masterList.ShouldBeEquivalentTo(this.targetList);
+      this.masterList.Should().BeEquivalentTo(this.targetList);
     }
   }
 }
